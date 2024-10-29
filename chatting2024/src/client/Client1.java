@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class Client1 extends JFrame{
+public class Client1 extends JFrame implements ActionListener{
 	
 	//login GUI
 	private JFrame loginGUI = new JFrame("Login");
@@ -31,12 +31,14 @@ public class Client1 extends JFrame{
 	private JList<String> roomJlist;
 	private JList<String> clientJlist;
 	private JTextField msg_tf;
+	JButton sendBtn;
 
 
 	public Client1() {
 		// TODO Auto-generated constructor stub
 		initLoginGUI();
 		initMainGUI();
+		addActionListeners();
 	}
 	
 	void initLoginGUI() {
@@ -77,10 +79,6 @@ public class Client1 extends JFrame{
 		loginJpanel.add(lblId);
 		
 		loginBtn = new JButton("로그인");
-		loginBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		loginBtn.setBounds(12, 174, 261, 23);
 		loginJpanel.add(loginBtn);
 		
@@ -106,10 +104,6 @@ public class Client1 extends JFrame{
 		contentPane.add(roomJlist);
 		
 		noteBtn = new JButton("쪽지 전송");
-		noteBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		noteBtn.setBounds(12, 156, 118, 23);
 		contentPane.add(noteBtn);
 		
@@ -122,18 +116,10 @@ public class Client1 extends JFrame{
 		contentPane.add(clientJlist);
 		
 		createRoomBtn = new JButton("방만들");
-		createRoomBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		createRoomBtn.setBounds(12, 375, 118, 23);
 		contentPane.add(createRoomBtn);
 		
 		joinRoomBtn = new JButton("채팅방참여");
-		joinRoomBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		joinRoomBtn.setBounds(12, 344, 118, 23);
 		contentPane.add(joinRoomBtn);
 		
@@ -146,15 +132,42 @@ public class Client1 extends JFrame{
 		contentPane.add(msg_tf);
 		msg_tf.setColumns(10);
 		
-		JButton sendBtn = new JButton("전송");
+		sendBtn = new JButton("전송");
 		sendBtn.setBounds(410, 375, 64, 23);
 		contentPane.add(sendBtn);
 		
 		this.setVisible(true);
 	}
 	
+	public void addActionListeners() {
+		loginBtn.addActionListener(this);
+		noteBtn.addActionListener(this);
+		joinRoomBtn.addActionListener(this);
+		createRoomBtn.addActionListener(this);
+		sendBtn.addActionListener(this);
+	};
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==loginBtn) {
+			System.out.println("서버 접속");
+		} else if (e.getSource()==noteBtn) {
+			System.out.println("쪽지 보내기");
+		} else if(e.getSource()==joinRoomBtn) {
+			System.out.println("채팅방 가입");
+		} else if(e.getSource()==createRoomBtn) {
+			System.out.println("채팅방 생성");
+		} else if(e.getSource()==sendBtn) {
+			System.out.println("메시지 전송");
+		}
+		
+	}	
+	
 	public static void main(String[] args) {
 		new Client1();
 		
 	}
+
+
 }
